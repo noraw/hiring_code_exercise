@@ -17,7 +17,7 @@ us the chance to evaluate your thought processes and coding style.
 ## Setup
 
 Clone the following repository:
-https://github.com/measur3d/hiring\_code\_exercise.git and switch to
+https://github.com/measur3d/hiring_code_exercise.git and switch to
 the branch `3d_apps_dev_2019`. Please do not push to public forks of
 this repository, instead create your own fork which we will use for
 evaluation upon completion. You will need to install Qt5. We have
