@@ -1,5 +1,7 @@
-# hiring_code_exercise
-This repository exists to hold sample code exercises for potential new hires
+# 3D App Developer Exercise
+You should have been directed to this repository and branch from the
+hiring questionnaire. If you have any questions, please let our hiring
+recruiter know!
 
 ## Coding Exercise
 
@@ -22,7 +24,7 @@ evaluation upon completion. You will need to install Qt5. We have
 tested it on OS X; you may need to modify some code to get it to work
 on other systems. The project is a standard CMake project. Once you
 have compiled the code, you should be able to execute the program
-\texttt{CodeExercise} in the build directory. This project is fairly
+`CodeExercise` in the build directory. This project is fairly
 simple. It presents a 3D view in which multiple 3D models can be
 visualized and rotated in space. On the right hand side, there are
 sliders that indicate the various degrees of rotation in Euler
