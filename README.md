@@ -1,7 +1,6 @@
 # 3D App Developer Exercise
 You should have been directed to this repository and branch from the
-hiring questionnaire. If you have any questions, please let our hiring
-recruiter know!
+hiring questionnaire. If you have any questions, please let our recruiter know!
 
 ## Coding Exercise
 
