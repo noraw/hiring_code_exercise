@@ -69,7 +69,7 @@ GLWidget::GLWidget(QWidget *parent)
       m_yRot(0),
       m_zRot(0),
       m_program(0),
-      m_shape( new UV_Sphere() )
+      m_shape( new UV_Icosahedron() )
 {
     m_core = QSurfaceFormat::defaultFormat().profile() == QSurfaceFormat::CoreProfile;
     // --transparent causes the clear color to be transparent. Therefore, on systems that
@@ -237,7 +237,7 @@ void GLWidget::initializeGL()
     // the signal will be followed by an invocation of initializeGL() where we
     // can recreate all resources.
     connect(context(), &QOpenGLContext::aboutToBeDestroyed, this, &GLWidget::cleanup);
-    m_shape.reset( new UV_Sphere() );
+    m_shape.reset( new UV_Icosahedron() );
     
     initializeOpenGLFunctions();
     glClearColor(0, 0, 0, m_transparent ? 0 : 1);

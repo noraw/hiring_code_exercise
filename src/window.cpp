@@ -67,7 +67,7 @@ Window::Window(MainWindow *mw)
     : mainWindow(mw)
 {
     glWidget = new GLWidget;
-    glWidget->setSphereModel(GLWidget::MODEL::UV_SPHERE);    
+    glWidget->setSphereModel(GLWidget::MODEL::UV_ICOSAHEDRON);
 
     xSlider = createSlider();
     ySlider = createSlider();
@@ -153,9 +153,10 @@ QComboBox *Window::createComboBox(GLWidget *widget)
             });
     
     
+    box->addItem(thirdAction->text(), QVariant::fromValue(thirdAction));
     box->addItem(firstAction->text(), QVariant::fromValue(firstAction));
     box->addItem(secondAction->text(), QVariant::fromValue(secondAction));
-    box->addItem(thirdAction->text(), QVariant::fromValue(thirdAction));
+
     
     return box;
 }
