@@ -11,15 +11,14 @@ public:
     virtual const GLfloat *constData() const override final { return m_data.constData(); }
     virtual int count() const override final { return m_count; }
     virtual int vertexCount() const override final { return m_count / 6; }
-    virtual void setTesselation(unsigned int level) override final { tesselation_factor = level; }  
+    virtual void setTesselation(unsigned int level) override final;
 
 private:
-
+    void createSphere();
+    
     int Parallels() { return std::max(0, tesselation_factor) + min_parallels; }
     int Meridians() { return std::max(0, tesselation_factor) + min_meridians; }
     float Radius() { return radius; }
-    
-            
     
     void add(const QVector3D &v, const QVector3D &n);
     
@@ -29,7 +28,7 @@ private:
                   GLfloat x2, GLfloat y2, GLfloat z2,
                   GLfloat x3, GLfloat y3, GLfloat z3);
     
-    int tesselation_factor = { 5 };
+    int tesselation_factor = { 1 };
     int min_parallels = { 3 };
     int min_meridians = { 4 };
     float radius = {0.25f};    

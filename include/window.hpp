@@ -76,12 +76,14 @@ private slots:
 
 private:
     QSlider *createSlider();
-    QComboBox *createComboBox(GLWidget *widget);    
+    QSlider *createSubSlider();
+    QComboBox *createComboBox(GLWidget *widget);
 
     GLWidget *glWidget;
     QSlider *xSlider;
     QSlider *ySlider;
     QSlider *zSlider;
+    QSlider *subSlider;
     QComboBox *box;
     MainWindow *mainWindow;
 

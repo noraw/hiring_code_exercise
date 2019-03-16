@@ -72,6 +72,7 @@ Window::Window(MainWindow *mw)
     xSlider = createSlider();
     ySlider = createSlider();
     zSlider = createSlider();
+    subSlider = createSubSlider();
 
     connect(xSlider, &QSlider::valueChanged, glWidget, &GLWidget::setXRotation);
     connect(glWidget, &GLWidget::xRotationChanged, xSlider, &QSlider::setValue);
@@ -79,7 +80,8 @@ Window::Window(MainWindow *mw)
     connect(glWidget, &GLWidget::yRotationChanged, ySlider, &QSlider::setValue);
     connect(zSlider, &QSlider::valueChanged, glWidget, &GLWidget::setZRotation);
     connect(glWidget, &GLWidget::zRotationChanged, zSlider, &QSlider::setValue);
-
+    connect(subSlider, &QSlider::valueChanged, glWidget, &GLWidget::setSubdivision);
+    
     box = createComboBox(glWidget);
     connect(box, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Window::ShapeSelectorIndexChanged);    
     
@@ -95,6 +97,7 @@ Window::Window(MainWindow *mw)
     
     controlsLayout->addWidget(sliders);
     controlsLayout->addWidget(box);
+    controlsLayout->addWidget(subSlider);
     QWidget *controls = new QWidget;
     controls->setLayout(controlsLayout);    
     
@@ -122,6 +125,17 @@ QSlider *Window::createSlider()
     slider->setPageStep(15 * 16);
     slider->setTickInterval(15 * 16);
     slider->setTickPosition(QSlider::TicksRight);
+    return slider;
+}
+
+QSlider *Window::createSubSlider()
+{
+    QSlider *slider = new QSlider(Qt::Horizontal);
+    slider->setRange(0, 100);
+    slider->setSingleStep(1);
+    slider->setPageStep(1);
+    slider->setTickInterval(5);
+    slider->setTickPosition(QSlider::TicksBelow);
     return slider;
 }
 

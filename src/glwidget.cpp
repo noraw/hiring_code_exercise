@@ -156,6 +156,13 @@ void GLWidget::setZRotation(int angle)
     }
 }
 
+void GLWidget::setSubdivision(int level)
+{
+    m_shape->setTesselation(level);
+    resetGPUBuffers(false);
+    update();
+}
+
 void GLWidget::cleanup()
 {
     if (m_program == nullptr)
