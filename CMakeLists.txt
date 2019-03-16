@@ -12,7 +12,8 @@ endif()
 if(WIN32)
   list(APPEND CMAKE_PREFIX_PATH "C:/Qt/5.9/msvc2015_64" "C:/Qt/5.9.1/msvc2017_64")
 elseif(APPLE)
-  list(APPEND CMAKE_PREFIX_PATH "/usr/local/opt/qt5")
+  list(APPEND CMAKE_PREFIX_PATH "/Users/norawillett/Qt/5.12.1/clang_64")
+  #list(APPEND CMAKE_PREFIX_PATH "/usr/local/opt/qt5")
 endif()
 
 # Instruct CMake to run moc automatically when needed
