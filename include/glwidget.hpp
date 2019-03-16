@@ -69,7 +69,7 @@ public:
     GLWidget(QWidget *parent = 0);
     ~GLWidget();
 
-    enum class MODEL {LOGO, UV_SPHERE};
+    enum class MODEL {LOGO, UV_SPHERE, UV_ICOSAHEDRON};
             
     static bool isTransparent() { return m_transparent; }
     static void setTransparent(bool t) { m_transparent = t; }

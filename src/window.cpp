@@ -132,7 +132,9 @@ QComboBox *Window::createComboBox(GLWidget *widget)
     firstAction->setText("UV Sphere");
     secondAction = new QAction(this);
     secondAction->setText("Logo");
-
+    thirdAction = new QAction(this);
+    thirdAction->setText("Icosahedron");
+    
     connect(firstAction, &QAction::triggered,
             [=]( ) {
                 widget->setSphereModel(GLWidget::MODEL::UV_SPHERE);
@@ -143,9 +145,17 @@ QComboBox *Window::createComboBox(GLWidget *widget)
                 widget->setSphereModel(GLWidget::MODEL::LOGO);
                 widget->update();                
             });
-
+    
+    connect(thirdAction, &QAction::triggered,
+            [=]( ) {
+                widget->setSphereModel(GLWidget::MODEL::UV_ICOSAHEDRON);
+                widget->update();
+            });
+    
+    
     box->addItem(firstAction->text(), QVariant::fromValue(firstAction));
     box->addItem(secondAction->text(), QVariant::fromValue(secondAction));
+    box->addItem(thirdAction->text(), QVariant::fromValue(thirdAction));
     
     return box;
 }

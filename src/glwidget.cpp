@@ -59,6 +59,7 @@
 
 #include <logo.hpp>
 #include <uv_sphere.hpp>
+#include <uv_icosahedron.hpp>
 
 bool GLWidget::m_transparent = false;
 
@@ -115,6 +116,11 @@ void GLWidget::setSphereModel(MODEL type)
         m_shape.reset( new UV_Sphere() );        
     }
 
+    if( type == MODEL::UV_ICOSAHEDRON ){
+        std::cout << "Setting Model to UV_ICOSAHEDRON" << std::endl;
+        m_shape.reset( new UV_Icosahedron() );
+    }
+    
     resetGPUBuffers(false);
 }
 
