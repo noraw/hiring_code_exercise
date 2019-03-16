@@ -15,9 +15,9 @@ public:
     virtual void setTesselation(unsigned int level) override final { tesselation_factor = level; }  
 
 private:
-    float Phi() { return phi; }
+    float Phi() { return phi/scale; }
     
-            
+    void createInitialShape();
     
     void add(const QVector3D &v, const QVector3D &n);
     
@@ -25,12 +25,11 @@ private:
                   GLfloat x2, GLfloat y2, GLfloat z2,
                   GLfloat x3, GLfloat y3, GLfloat z3);
     
-    int tesselation_factor = { 5 };
-    int min_parallels = { 3 };
-    int min_meridians = { 4 };
-    float scale = 10.0f;
+    int tesselation_factor = { 0 };
+    float radius = {.25f};
+    float phi = {((1+sqrt(5.0f))/2)};
+    float scale = sqrt(1 + phi * phi) * 1/radius;
     float unit = 1/scale;
-    float phi = {((1+sqrt(5.0f))/2)/scale};
     QVector<GLfloat> m_data;
     int m_count;
     

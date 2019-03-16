@@ -6,9 +6,12 @@
 UV_Icosahedron::UV_Icosahedron()
     : m_count(0)
 {
+    createInitialShape();
+}
 
+void UV_Icosahedron::createInitialShape()
+{
     // Build Vertex List
-    std::vector<QVector3D> vertices;    
     std::vector<QVector3D> unqiueVertices;
     unqiueVertices.emplace_back(0.0f, unit, Phi());
     unqiueVertices.emplace_back(unit, Phi(), 0.0f);
@@ -26,29 +29,31 @@ UV_Icosahedron::UV_Icosahedron()
     unqiueVertices.emplace_back(-unit, -Phi(), 0.0f);
     unqiueVertices.emplace_back(-Phi(), 0.0f, -unit);
     
+    
+    // create a list of the vertices for each triangle
     std::vector<QVector3D> triangles;
-    triangles.emplace_back(0,1,2);
-    triangles.emplace_back(0,2,3);
-    triangles.emplace_back(0,3,8);
-    triangles.emplace_back(0,8,4);
-    triangles.emplace_back(0,4,1);
-    triangles.emplace_back(1,6,5);
-    triangles.emplace_back(1,4,6);
-    triangles.emplace_back(1,5,2);
-    triangles.emplace_back(5,7,2);
-//    triangles.emplace_back(5,9,6);
-//    triangles.emplace_back(5,9,7);
-//    triangles.emplace_back(7,3,2);
-//    triangles.emplace_back(7,9,10);
-//    triangles.emplace_back(7,3,10);
-//    triangles.emplace_back(10,3,8);
-//    triangles.emplace_back(10,9,11);
-//    triangles.emplace_back(10,8,11);
-//    triangles.emplace_back(4,6,11);
-//    triangles.emplace_back(4,11,8);
-//    triangles.emplace_back(6,11,9);
+    triangles.emplace_back(1,0,2);
+    triangles.emplace_back(2,0,3);
+    triangles.emplace_back(3,0,8);
+    triangles.emplace_back(8,0,4);
+    triangles.emplace_back(4,0,1);
+    triangles.emplace_back(6,1,5);
+    triangles.emplace_back(4,1,6);
+    triangles.emplace_back(5,1,2);
+    triangles.emplace_back(7,5,2);
+    triangles.emplace_back(6,5,9);
+    triangles.emplace_back(5,7,9);
+    triangles.emplace_back(3,7,2);
+    triangles.emplace_back(9,7,10);
+    triangles.emplace_back(10,7,3);
+    triangles.emplace_back(10,3,8);
+    triangles.emplace_back(9,10,11);
+    triangles.emplace_back(8,11,10);
+    triangles.emplace_back(4,6,11);
+    triangles.emplace_back(8,4,11);
+    triangles.emplace_back(11,6,9);
     
-    
+    //create all the triangles
     for (uint32_t i = 0; i < triangles.size(); ++i)
     {
         int id1 = triangles[i].x();
@@ -59,10 +64,7 @@ UV_Icosahedron::UV_Icosahedron()
                  unqiueVertices[id3].x(), unqiueVertices[id3].y(), unqiueVertices[id3].z());
     }
 
-            
 }
-
-
 
 void UV_Icosahedron::add(const QVector3D &v, const QVector3D &n)
 {
