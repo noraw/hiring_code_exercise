@@ -12,12 +12,15 @@ public:
     virtual const GLfloat *constData() const override final { return m_data.constData(); }
     virtual int count() const override final { return m_count; }
     virtual int vertexCount() const override final { return m_count / 6; }
-    virtual void setTesselation(unsigned int level) override final { tesselation_factor = level; }  
+    virtual void setTesselation(unsigned int level) override final;
 
 private:
     float Phi() { return phi/scale; }
     
     void createInitialShape();
+    void subdivide();
+    void createShapeData();
+    QVector3D splitEdge(int id1, int id2);
     
     void add(const QVector3D &v, const QVector3D &n);
     

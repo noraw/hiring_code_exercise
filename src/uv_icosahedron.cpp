@@ -11,8 +11,12 @@ UV_Icosahedron::UV_Icosahedron()
 
 void UV_Icosahedron::createInitialShape()
 {
+    // make sure to clear out the previous data
+    m_data.clear();
+    m_count = 0;
+    
     // Build Vertex List
-    std::vector<QVector3D> unqiueVertices;
+    unqiueVertices.clear();
     unqiueVertices.emplace_back(0.0f, unit, Phi());
     unqiueVertices.emplace_back(unit, Phi(), 0.0f);
     unqiueVertices.emplace_back(Phi(), 0.0f, unit);
@@ -31,7 +35,7 @@ void UV_Icosahedron::createInitialShape()
     
     
     // create a list of the vertices for each triangle
-    std::vector<QVector3D> triangles;
+    triangles.clear();
     triangles.emplace_back(1,0,2);
     triangles.emplace_back(2,0,3);
     triangles.emplace_back(3,0,8);
@@ -53,6 +57,10 @@ void UV_Icosahedron::createInitialShape()
     triangles.emplace_back(8,4,11);
     triangles.emplace_back(11,6,9);
     
+    createShapeData();
+}
+    
+void UV_Icosahedron::createShapeData() {
     //create all the triangles
     for (uint32_t i = 0; i < triangles.size(); ++i)
     {
@@ -63,9 +71,59 @@ void UV_Icosahedron::createInitialShape()
                  unqiueVertices[id2].x(), unqiueVertices[id2].y(), unqiueVertices[id2].z(),
                  unqiueVertices[id3].x(), unqiueVertices[id3].y(), unqiueVertices[id3].z());
     }
-
 }
 
+void UV_Icosahedron::subdivide()
+{
+    std::vector<QVector3D> newTriangles;
+    for (uint32_t i = 0; i < triangles.size(); ++i)
+    {
+        int id1 = triangles[i].x();
+        int id2 = triangles[i].y();
+        int id3 = triangles[i].z();
+        QVector3D edge1 = splitEdge(id1, id2);
+        QVector3D edge2 = splitEdge(id2, id3);
+        QVector3D edge3 = splitEdge(id3, id1);
+        int v1 = unqiueVertices.size();
+        unqiueVertices.emplace_back(edge1);
+        int v2 = unqiueVertices.size();
+        unqiueVertices.emplace_back(edge2);
+        int v3 = unqiueVertices.size();
+        unqiueVertices.emplace_back(edge3);
+        
+        newTriangles.emplace_back(id1,v1,v3);
+        newTriangles.emplace_back(v1,id2,v2);
+        newTriangles.emplace_back(v2,id3,v3);
+        newTriangles.emplace_back(v1,v2,v3);
+    }
+    triangles = newTriangles;
+    createShapeData();
+}
+
+QVector3D UV_Icosahedron::splitEdge(int id1, int id2)
+{
+    QVector3D centroid = (unqiueVertices[id1] + unqiueVertices[id2])/2;
+    centroid.normalize();
+    centroid = centroid * radius;
+    return centroid;
+}
+
+void UV_Icosahedron::setTesselation(unsigned int level)
+{
+    // I set the max number of sub divisions to be 6 since anything more than
+    // that results in a delay with the slider. Also, at this level it already looks like a sphere.
+    int maxDivisions = 6;
+    int newFactor = round(level/100.0f * maxDivisions);
+    if(tesselation_factor != newFactor) {
+        tesselation_factor = newFactor;
+        createInitialShape();
+        for (uint32_t i = 0; i < tesselation_factor; ++i)
+        {
+            subdivide();
+        }
+    }
+}
+    
 void UV_Icosahedron::add(const QVector3D &v, const QVector3D &n)
 {
     m_data.push_back(v.x());    
